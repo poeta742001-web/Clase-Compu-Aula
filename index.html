@@ -20,67 +20,112 @@
 --font-display:'Orbitron',sans-serif;--font-body:'Exo 2',sans-serif;
 }
 
-/* --- ESTILOS DE LA INTRO PAC-MAN --- */
+/* --- ESTILOS DE LA INTRO PAC-MAN (MEJORADO Y BONITO) --- */
 #intro-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: #000;
+    background: #000; /* Fondo negro puro clásico */
     z-index: 9999;
     display: flex;
     align-items: center;
     pointer-events: none;
     transition: opacity 1s ease;
+    overflow: hidden; /* Asegura que nada salga de la pantalla */
 }
 
-.pacman-container {
-    position: absolute;
-    left: -300px;
+.pacman-scene {
+    position: relative;
+    width: 100%;
+    height: 100px; /* Altura del pasillo por donde pasan */
     display: flex;
     align-items: center;
-    gap: 20px;
-    animation: moveAcross 4.5s linear forwards;
 }
 
-.pacman {
-    width: 50px;
-    height: 50px;
-    background: #FFFF00;
-    position: relative;
-    clip-path: polygon(100% 20%, 100% 35%, 50% 50%, 100% 65%, 100% 80%, 0% 100%, 0% 0%);
-    animation: eat 0.3s steps(2) infinite;
+.mover-container {
+    position: absolute;
+    left: -350px; /* Empieza fuera por la izquierda */
+    display: flex;
+    align-items: center;
+    gap: 25px; /* Espacio entre el fantasma y Pac-Man */
+    animation: moveAcross 5s linear forwards;
 }
 
+/* Contenedor del SVG de Pac-Man para la animación de comer */
+.pacman-svg-wrapper {
+    width: 60px;
+    height: 60px;
+    /* Suavizado de bordes para que se vea bonito */
+    filter: drop-shadow(0 0 2px rgba(255, 255, 0, 0.5));
+}
+
+/* Fantasma (Blinky) - Mejorado estética */
 .ghost {
-    width: 45px;
-    height: 50px;
-    background: #FF0000; /* Fantasma Rojo (Blinky) */
+    width: 50px;
+    height: 55px;
+    background: #FF0000; 
     position: relative;
-    border-radius: 25px 25px 0 0;
+    border-radius: 25px 25px 0 0; /* Cabeza redondeada y suave */
+    filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.7));
 }
 
-.ghost::before { /* Ojos */
+/* Ojos del fantasma - Más bonitos */
+.ghost::before, .ghost::after {
     content: '';
     position: absolute;
-    top: 15px; left: 10px; width: 8px; height: 8px; background: white;
-    box-shadow: 20px 0 white;
+    background: white;
+    border-radius: 50%;
 }
 
+/* Ojo izquierdo */
+.ghost::before {
+    top: 15px; left: 10px; width: 12px; height: 15px;
+}
+/* Ojo derecho */
+.ghost::after {
+    top: 15px; left: 28px; width: 12px; height: 15px;
+}
+
+/* Pupilas mirando a la derecha (persiguiendo) */
+.pupil-l, .pupil-r {
+    position: absolute;
+    background: #2121DE; /* Azul clásico pupila */
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    z-index: 2;
+}
+.pupil-l { top: 20px; left: 16px; }
+.pupil-r { top: 20px; left: 34px; }
+
+/* Patas onduladas del fantasma con CSS */
+.ghost-feet {
+    position: absolute;
+    bottom: -8px; left: 0; width: 100%; height: 12px;
+    background: #FF0000;
+    clip-path: polygon(0% 0%, 16% 100%, 33% 0%, 50% 100%, 66% 0%, 83% 100%, 100% 0%);
+}
+
+/* Bolitas (Pellets) - Mejorado brillo neón */
 .pellet {
-    width: 12px;
-    height: 12px;
-    background: var(--primary); /* Bolitas del color de tu tema */
-    border-radius: 2px;
-    box-shadow: 0 0 10px hsla(var(--neon-glow), 0.8);
+    width: 14px;
+    height: 14px;
+    background: var(--primary); /* Color verde neón de tu tema */
+    border-radius: 50%; /* Redondas y suaves */
+    box-shadow: 0 0 10px var(--primary), 0 0 20px hsla(var(--neon-glow), 0.5);
+    animation: pelletPulse 1s infinite alternate;
 }
 
+/* Animaciones */
+
+/* Movimiento por la pantalla */
 @keyframes moveAcross {
-    0% { left: -300px; }
-    100% { left: 110%; }
+    0% { left: -350px; }
+    100% { left: 100%; }
 }
 
-@keyframes eat {
-    0% { clip-path: polygon(100% 20%, 100% 35%, 50% 50%, 100% 65%, 100% 80%, 0% 100%, 0% 0%); }
-    100% { clip-path: polygon(100% 0%, 100% 0%, 100% 50%, 100% 0%, 100% 100%, 0% 100%, 0% 0%); }
+/* Pulso de luz para las bolitas */
+@keyframes pelletPulse {
+    from { opacity: 0.6; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1.1); }
 }
 
 /* --- RESTO DE TUS ESTILOS --- */
@@ -161,14 +206,35 @@ footer .brand{font-family:var(--font-display);letter-spacing:.2em}
 <body>
 
 <div id="intro-overlay">
-    <div class="pacman-container">
-        <div class="ghost"></div>
-        <div class="pacman"></div>
-        <div class="pellet"></div>
-        <div class="pellet"></div>
-        <div class="pellet"></div>
-        <div class="pellet"></div>
-        <div class="pellet"></div>
+    <div class="pacman-scene">
+        <div class="mover-container">
+            
+            <div class="ghost">
+                <div class="pupil-l"></div>
+                <div class="pupil-r"></div>
+                <div class="ghost-feet"></div>
+            </div>
+
+            <div class="pacman-svg-wrapper">
+                <svg version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
+                    <path fill="#FFFF00" d="M50,50 L50,10 A40,40 0 1,1 50,90 Z">
+                        <animate attributeName="d" 
+                                 dur="0.25s" 
+                                 repeatCount="infinite" 
+                                 values="M50,50 L50,10 A40,40 0 1,1 50,90 Z; /* Boca abierta */
+                                         M50,50 L90,50 A40,40 0 1,1 90,50 Z; /* Boca casi cerrada */
+                                         M50,50 L50,10 A40,40 0 1,1 50,90 Z" /> </path>
+                </svg>
+            </div>
+
+            <div class="pellet"></div>
+            <div class="pellet"></div>
+            <div class="pellet"></div>
+            <div class="pellet"></div>
+            <div class="pellet"></div>
+            <div class="pellet"></div>
+            <div class="pellet"></div>
+        </div>
     </div>
 </div>
 
@@ -232,7 +298,7 @@ footer .brand{font-family:var(--font-display);letter-spacing:.2em}
 <ul>
 <li>Las encuestas online permiten alcanzar una muestra amplia y diversa de jóvenes gamers de forma rápida y económica.</li>
 <li>El análisis de contenido en redes sociales ofrece datos cualitativos auténticos sobre experiencias reales de usuarios.</li>
-<li>La combinación de ambas técnicas (método mixto) permite triangula la información y obtener resultados más sólidos.</li>
+<li>La combinación de ambas técnicas (método mixto) permite triangular la información y obtener resultados más sólidos.</li>
 <li>Al ser un tema digital, la investigación en medios digitales resulta coherente y contextualmente apropiada.</li>
 </ul>
 </div>
@@ -344,7 +410,7 @@ window.addEventListener('load', () => {
         setTimeout(() => {
             intro.style.display = 'none';
         }, 1000);
-    }, 4500); // Duración total de la intro (4.5 segundos)
+    }, 5000); // Duración total de la intro (5 segundos para cruzar toda la pantalla)
 });
 </script>
 
