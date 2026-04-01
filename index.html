@@ -20,7 +20,7 @@
 --font-display:'Orbitron',sans-serif;--font-body:'Exo 2',sans-serif;
 }
 
-/* --- ESTILOS DE LA INTRO PAC-MAN MEJORADA --- */
+/* --- ANIMACIÓN PAC-MAN INICIAL --- */
 #intro-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -32,7 +32,6 @@
     transition: opacity 1s ease;
     overflow: hidden;
 }
-
 .pacman-scene {
     position: relative;
     width: 100%;
@@ -40,7 +39,6 @@
     display: flex;
     align-items: center;
 }
-
 .mover-container {
     position: absolute;
     left: -400px;
@@ -49,12 +47,10 @@
     gap: 30px;
     animation: moveAcross 5s linear forwards;
 }
-
 .pacman-wrapper {
     width: 65px;
     height: 65px;
 }
-
 .ghost {
     width: 55px;
     height: 60px;
@@ -63,7 +59,6 @@
     border-radius: 30px 30px 0 0;
     filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.6));
 }
-
 .ghost::before, .ghost::after {
     content: '';
     position: absolute;
@@ -73,7 +68,6 @@
 }
 .ghost::before { left: 10px; }
 .ghost::after { left: 31px; }
-
 .pupil {
     position: absolute;
     background: #2121DE;
@@ -83,27 +77,24 @@
 }
 .p-left { left: 17px; }
 .p-right { left: 38px; }
-
 .ghost-feet {
     position: absolute;
     bottom: -10px; left: 0; width: 100%; height: 14px;
     background: #FF0000;
     clip-path: polygon(0% 0%, 16% 100%, 33% 0%, 50% 100%, 66% 0%, 83% 100%, 100% 0%);
 }
-
 .pellet {
     width: 15px; height: 15px;
     background: var(--primary);
     border-radius: 50%;
     box-shadow: 0 0 15px var(--primary);
 }
-
 @keyframes moveAcross {
     0% { left: -400px; }
-    100% { left: 110%; }
+    100% { left: 115%; }
 }
 
-/* --- ESTILOS DE LA PÁGINA --- */
+/* --- ESTILOS ORIGINALES --- */
 body{background:var(--bg);color:var(--fg);font-family:var(--font-body);line-height:1.7;
 background-image:linear-gradient(hsla(var(--neon-glow),.03) 1px,transparent 1px),linear-gradient(90deg,hsla(var(--neon-glow),.03) 1px,transparent 1px);background-size:50px 50px}
 a{color:var(--primary);text-decoration:none}
@@ -120,23 +111,62 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;background:hsla(240,15%,5%,.8
 .hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;text-align:center}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,hsla(240,15%,5%,.6),hsla(240,15%,5%,.4),var(--bg))}
 .hero-content{position:relative;z-index:10;padding:1rem;max-width:52rem}
+.hero-sub{color:var(--primary);font-family:var(--font-display);font-size:clamp(.7rem,1.5vw,.9rem);letter-spacing:.3em;margin-bottom:1rem;text-shadow:0 0 7px hsla(var(--neon-glow),.8),0 0 20px hsla(var(--neon-glow),.5)}
 .hero h1{font-size:clamp(2rem,6vw,4.5rem);font-weight:900;line-height:1.1;margin-bottom:1.5rem}
-.hero h1 span{color:var(--primary);text-shadow:0 0 7px hsla(var(--neon-glow),.8),0 0 20px hsla(var(--neon-glow),.5)}
+.hero h1 span{color:var(--primary);text-shadow:0 0 7px hsla(var(--neon-glow),.8),0 0 20px hsla(var(--neon-glow),.5),0 0 42px hsla(var(--neon-glow),.3)}
+.hero p{font-size:clamp(1rem,2vw,1.25rem);color:var(--muted-fg);max-width:40rem;margin:0 auto 2.5rem}
+.btn-primary{display:inline-block;padding:.75rem 2rem;background:var(--primary);color:var(--primary-fg);font-family:var(--font-display);font-weight:700;font-size:.85rem;letter-spacing:.12em;border-radius:.5rem;box-shadow:0 0 5px hsla(var(--neon-glow),.4),inset 0 0 5px hsla(var(--neon-glow),.1);transition:transform .2s}
+.btn-primary:hover{transform:scale(1.05)}
 
 main{max-width:52rem;margin:0 auto;padding:5rem 1rem}
+
 .section-card{border:1px solid hsla(var(--neon-glow),.3);border-radius:.75rem;background:hsla(240,12%,10%,.6);backdrop-filter:blur(4px);padding:1.5rem;margin-bottom:3rem;animation:fadeUp .6s ease both}
+.section-card.purple{border-color:hsla(var(--neon-purple),.3);box-shadow:0 0 5px hsla(var(--neon-purple),.4),inset 0 0 5px hsla(var(--neon-purple),.1)}
+.section-card.green{box-shadow:0 0 5px hsla(var(--neon-glow),.4),inset 0 0 5px hsla(var(--neon-glow),.1)}
+.section-card.blue{border-color:hsla(200,100%,55%,.3)}
+.section-card.red{border-color:hsla(0,80%,55%,.3)}
+@media(min-width:768px){.section-card{padding:2.5rem}}
+.section-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:1.5rem}
+.section-num{font-size:clamp(2.5rem,5vw,3.5rem);font-family:var(--font-display);font-weight:900;opacity:.3}
+.section-num.green{color:var(--primary);text-shadow:0 0 7px hsla(var(--neon-glow),.8),0 0 20px hsla(var(--neon-glow),.5)}
+.section-num.purple{color:var(--secondary);text-shadow:0 0 7px hsla(var(--neon-purple),.8),0 0 20px hsla(var(--neon-purple),.5)}
+.section-num.blue{color:var(--accent)}
+.section-num.red{color:var(--destructive)}
+.section-title{font-size:clamp(1.3rem,3vw,1.8rem);font-weight:700;letter-spacing:.05em}
+.section-body{color:hsla(220,20%,90%,.8);line-height:1.8}
+.section-body strong.green{color:var(--primary)}.section-body strong.purple{color:var(--secondary)}.section-body strong.blue{color:var(--accent)}
+
 .info-box{border:1px solid hsla(var(--neon-glow),.2);border-radius:.5rem;padding:1.25rem;background:hsla(240,12%,10%,.4);margin-top:1.5rem}
+.info-box.purple-border{border-color:hsla(var(--neon-purple),.2)}
+.info-box.red-border{border-color:hsla(0,80%,55%,.2)}
+.info-box h3,.info-box h4{font-family:var(--font-display);font-size:.75rem;letter-spacing:.12em;margin-bottom:.75rem}
+.info-box h3.green,.info-box h4.green{color:var(--primary)}
+.info-box h3.purple,.info-box h4.purple{color:var(--secondary)}
+.info-box h4.red{color:var(--destructive)}
+.info-box h4.blue{color:var(--accent)}
+.info-box ul,.info-box ol{padding-left:1.25rem;color:hsla(220,20%,90%,.7)}
+.info-box li{margin-bottom:.5rem;font-size:.95rem}
+
+.grid-2{display:grid;gap:1rem;margin-top:1.5rem}
+@media(min-width:768px){.grid-2{grid-template-columns:1fr 1fr}}
 
 .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:3rem}
 @media(min-width:768px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
-.stat-card{border:1px solid hsla(var(--neon-glow),.2);border-radius:.5rem;background:hsla(240,12%,10%,.4);padding:1.25rem;text-align:center}
-.stat-val{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:900;color:var(--primary);font-family:var(--font-display)}
+.stat-card{border:1px solid hsla(var(--neon-glow),.2);border-radius:.5rem;background:hsla(240,12%,10%,.4);padding:1.25rem;text-align:center;box-shadow:0 0 5px hsla(var(--neon-glow),.4),inset 0 0 5px hsla(var(--neon-glow),.1)}
+.stat-val{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:900;color:var(--primary);font-family:var(--font-display);text-shadow:0 0 7px hsla(var(--neon-glow),.8),0 0 20px hsla(var(--neon-glow),.5)}
+.stat-label{font-size:.85rem;color:var(--muted-fg);margin-top:.5rem}
+
+.step{margin-bottom:1.5rem}
+.step h3{color:var(--accent);font-family:var(--font-display);font-size:.75rem;letter-spacing:.1em;margin-bottom:.35rem}
 
 .team-member{display:flex;align-items:center;gap:1rem;border:1px solid hsla(var(--neon-purple),.15);border-radius:.5rem;padding:1rem;background:hsla(240,12%,10%,.3);margin-bottom:.75rem}
+.team-num{color:var(--secondary);font-family:var(--font-display);font-size:.85rem;font-weight:700;min-width:2rem}
 
 footer{border-top:1px solid hsla(var(--neon-glow),.1);padding:2rem 1rem;text-align:center;font-size:.75rem;color:var(--muted-fg)}
+footer .brand{font-family:var(--font-display);letter-spacing:.2em}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeUp .6s ease both}
 </style>
 </head>
 <body>
@@ -149,9 +179,8 @@ footer{border-top:1px solid hsla(var(--neon-glow),.1);padding:2rem 1rem;text-ali
                 <div class="pupil p-right"></div>
                 <div class="ghost-feet"></div>
             </div>
-
             <div class="pacman-wrapper">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="48" fill="#FFFF00" />
                     <path d="M50,50 L100,20 L100,80 Z" fill="#000">
                         <animate attributeName="d" dur="0.2s" repeatCount="infinite"
@@ -161,7 +190,6 @@ footer{border-top:1px solid hsla(var(--neon-glow),.1);padding:2rem 1rem;text-ali
                     </path>
                 </svg>
             </div>
-
             <div class="pellet"></div>
             <div class="pellet"></div>
             <div class="pellet"></div>
@@ -188,51 +216,154 @@ footer{border-top:1px solid hsla(var(--neon-glow),.1);padding:2rem 1rem;text-ali
 <header class="hero">
 <div class="hero-overlay"></div>
 <div class="hero-content">
-<p class="hero-sub" style="color:var(--primary); letter-spacing: 0.3em; margin-bottom: 1rem;">PROYECTO DE INVESTIGACIÓN DIGITAL</p>
+<p class="hero-sub">PROYECTO DE INVESTIGACIÓN DIGITAL</p>
 <h1>Adicción a los <span>Videojuegos</span></h1>
-<p style="color:var(--muted-fg); max-width:40rem; margin:0 auto 2.5rem;">Un análisis sobre el impacto del uso excesivo de videojuegos en la vida cotidiana de los jóvenes.</p>
+<p>Un análisis sobre el impacto del uso excesivo de videojuegos en la vida cotidiana de los jóvenes, sus causas, consecuencias y posibles soluciones.</p>
 <a href="#tema" class="btn-primary">EXPLORAR ▼</a>
 </div>
 </header>
 
 <main>
+
 <section class="section-card green" id="tema">
-<div class="section-header" style="display:flex; align-items:baseline; gap:1rem; margin-bottom:1.5rem;">
-<span class="section-num green" style="font-size:3rem; font-weight:900; color:var(--primary); opacity:0.5;">01</span>
+<div class="section-header">
+<span class="section-num green">01</span>
 <h2 class="section-title">Elección del Tema</h2>
 </div>
 <div class="section-body">
-<p><strong style="color:var(--primary)">Tema:</strong> La adicción a los videojuegos en jóvenes y adolescentes. Trastorno reconocido por la OMS desde 2018.</p>
+<p><strong class="green">Tema:</strong> La adicción a los videojuegos en jóvenes y adolescentes. Este fenómeno ha sido reconocido por la OMS como un trastorno de salud mental desde 2018, lo que lo convierte en un tema de alta relevancia social y educativa.</p>
 <div class="info-box">
-<h3 style="color:var(--primary); margin-bottom:0.5rem;">🎯 OBJETIVO GENERAL</h3>
-<p>Analizar las causas y consecuencias en jóvenes de 15 a 25 años.</p>
+<h3 class="green">🎯 OBJETIVO GENERAL</h3>
+<p>Analizar las causas, consecuencias y factores de riesgo de la adicción a los videojuegos en jóvenes de entre 15 y 25 años, mediante técnicas de investigación digital.</p>
 </div>
+<div class="info-box purple-border">
+<h3 class="purple">📌 OBJETIVOS ESPECÍFICOS</h3>
+<ul>
+<li>Identificar los principales factores que contribuyen al desarrollo de la adicción a los videojuegos.</li>
+<li>Evaluar el impacto del uso excesivo de videojuegos en el rendimiento académico, relaciones sociales y salud mental de los jóvenes.</li>
+<li>Proponer recomendaciones y estrategias de prevención basadas en los hallazgos de la investigación.</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section class="section-card purple" id="metodo">
+<div class="section-header">
+<span class="section-num purple">02</span>
+<h2 class="section-title">Método de Investigación</h2>
+</div>
+<div class="section-body">
+<p><strong class="purple">Técnica seleccionada:</strong> Encuesta online a través de Google Forms, complementada con análisis de contenido en redes sociales (Reddit, Twitter/X, foros de gaming).</p>
+<div class="info-box purple-border">
+<h3 class="purple">📋 JUSTIFICACIÓN</h3>
+<ul>
+<li>Las encuestas online permiten alcanzar una muestra amplia y diversa de jóvenes gamers de forma rápida y económica.</li>
+<li>El análisis de contenido en redes sociales ofrece datos cualitativos auténticos sobre experiencias reales de usuarios.</li>
+<li>La combinación de ambas técnicas (método mixto) permite triangular la información y obtener resultados más sólidos.</li>
+<li>Al ser un tema digital, la investigación en medios digitales resulta coherente y contextualmente apropiada.</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section class="section-card blue" id="investigacion">
+<div class="section-header">
+<span class="section-num blue">03</span>
+<h2 class="section-title">Desarrollo de la Investigación</h2>
+</div>
+<div class="section-body">
+<div class="step"><h3>PASO 1 — DISEÑO DEL INSTRUMENTO</h3><p>Se diseñó un cuestionario con 20 preguntas (escala Likert, opción múltiple y abiertas) sobre hábitos de juego, tiempo invertido, motivaciones e impacto percibido.</p></div>
+<div class="step"><h3>PASO 2 — RECOLECCIÓN DE DATOS</h3><p>La encuesta fue distribuida a través de redes sociales y comunidades de gaming, obteniendo respuestas de participantes entre 15 y 25 años durante un periodo de 2 semanas.</p></div>
+<div class="step"><h3>PASO 3 — ANÁLISIS DE REDES</h3><p>Se recopilaron y categorizaron publicaciones de foros y redes sociales donde usuarios comparten experiencias sobre hábitos excesivos de juego, buscando patrones comunes.</p></div>
+<div class="step"><h3>PASO 4 — DOCUMENTACIÓN</h3><p>Todos los datos fueron organizados en hojas de cálculo y bases de datos para su posterior análisis estadístico y cualitativo.</p></div>
 </div>
 </section>
 
 <div class="stats-grid">
-<div class="stat-card"><p class="stat-val">73%</p><p class="stat-label" style="font-size:0.8rem; color:var(--muted-fg)">juegan +3h diarias</p></div>
-<div class="stat-card"><p class="stat-val">58%</p><p class="stat-label" style="font-size:0.8rem; color:var(--muted-fg)">impacto estudios</p></div>
-<div class="stat-card"><p class="stat-val">45%</p><p class="stat-label" style="font-size:0.8rem; color:var(--muted-fg)">ansiedad</p></div>
-<div class="stat-card"><p class="stat-val">62%</p><p class="stat-label" style="font-size:0.8rem; color:var(--muted-fg)">aislamiento</p></div>
+<div class="stat-card"><p class="stat-val">73%</p><p class="stat-label">juegan más de 3 horas diarias</p></div>
+<div class="stat-card"><p class="stat-val">58%</p><p class="stat-label">reportan impacto en sus estudios</p></div>
+<div class="stat-card"><p class="stat-val">45%</p><p class="stat-label">sienten ansiedad al no jugar</p></div>
+<div class="stat-card"><p class="stat-val">62%</p><p class="stat-label">prefieren jugar que socializar</p></div>
 </div>
 
-<section class="section-card purple" id="equipo">
-<div class="section-header" style="display:flex; align-items:baseline; gap:1rem; margin-bottom:1.5rem;">
-<span class="section-num purple" style="font-size:3rem; font-weight:900; color:var(--secondary); opacity:0.5;">02</span>
-<h2 class="section-title">Equipo</h2>
+<section class="section-card red" id="analisis">
+<div class="section-header">
+<span class="section-num red">04</span>
+<h2 class="section-title">Análisis de la Información</h2>
 </div>
-<div class="team-member"><span>Mojica Isidoro Lael</span></div>
-<div class="team-member"><span>Phillips Lopez Leonardo</span></div>
-<div class="team-member"><span>Zamora Salgado Brandon</span></div>
+<div class="section-body">
+<p>Los datos recopilados revelan patrones significativos en el comportamiento de los jóvenes gamers:</p>
+<div class="grid-2">
+<div class="info-box red-border">
+<h4 class="red">⚠️ FACTORES DE RIESGO</h4>
+<ul>
+<li>Falta de supervisión parental</li>
+<li>Aislamiento social previo</li>
+<li>Sistemas de recompensa adictivos (loot boxes, rankings)</li>
+<li>Estrés académico como detonante</li>
+</ul>
+</div>
+<div class="info-box">
+<h4 class="green">✅ FACTORES PROTECTORES</h4>
+<ul>
+<li>Establecer horarios de juego</li>
+<li>Actividades alternativas (deporte, arte)</li>
+<li>Comunicación familiar abierta</li>
+<li>Conciencia sobre el uso del tiempo</li>
+</ul>
+</div>
+</div>
+<div class="info-box" style="margin-top:1.5rem">
+<h4 style="color:var(--fg)">📊 HALLAZGOS PRINCIPALES</h4>
+<p style="font-size:.9rem;color:hsla(220,20%,90%,.7)">Se encontró una correlación directa entre el tiempo diario de juego (superior a 4 horas) y la disminución del rendimiento académico. Además, los jugadores que reportaron sentirse "incapaces de dejar de jugar" también mostraron niveles más altos de ansiedad y alteraciones del sueño. Los juegos con mecánicas de recompensa variable (como cajas de botín) mostraron mayor potencial adictivo.</p>
+</div>
+</div>
 </section>
+
+<section class="section-card green" id="conclusiones">
+<div class="section-header">
+<span class="section-num green">05</span>
+<h2 class="section-title">Conclusiones</h2>
+</div>
+<div class="section-body">
+<p>La adicción a los videojuegos es un fenómeno real y creciente que afecta principalmente a jóvenes entre 15 y 25 años. Nuestra investigación confirma que no se trata simplemente de "jugar mucho", sino de un patrón de comportamiento que puede tener consecuencias significativas en la salud mental, el rendimiento académico y las relaciones interpersonales.</p>
+<p style="margin-top:1rem">Sin embargo, es importante destacar que los videojuegos no son inherentemente negativos. Cuando se utilizan con moderación, pueden fomentar habilidades cognitivas, trabajo en equipo y creatividad. El problema surge cuando el uso se vuelve compulsivo y desplaza otras actividades esenciales.</p>
+<div class="info-box" style="margin-top:1.5rem">
+<h4 class="green">💡 RECOMENDACIONES</h4>
+<ol>
+<li>Promover la educación digital y la autoconciencia sobre el tiempo de pantalla.</li>
+<li>Implementar controles parentales y establecer límites de tiempo.</li>
+<li>Fomentar actividades alternativas que generen satisfacción similar.</li>
+<li>Buscar ayuda profesional cuando se identifiquen señales de dependencia.</li>
+<li>Regular las mecánicas de juego diseñadas para generar adicción (loot boxes, pases de batalla).</li>
+</ol>
+</div>
+</div>
+</section>
+
+<section class="section-card purple" id="equipo">
+<div class="section-header">
+<span class="section-num purple">06</span>
+<h2 class="section-title">Integrantes del Equipo</h2>
+</div>
+<div class="section-body">
+<p style="color:var(--muted-fg)">Grupo: <span style="color:var(--secondary);font-weight:700">BTMV-2C</span></p>
+<div class="team-member"><span class="team-num">01</span><span>Mojica Isidoro Lael</span></div>
+<div class="team-member"><span class="team-num">02</span><span>Phillips Lopez Leonardo</span></div>
+<div class="team-member"><span class="team-num">03</span><span>Zamora Salgado Brandon</span></div>
+
+</div>
+</section>
+
 </main>
 
 <footer>
 <p class="brand">PROYECTO DE INVESTIGACIÓN DIGITAL — 2025</p>
+<p style="margin-top:.25rem;opacity:.5">Adicción a los Videojuegos</p>
 </footer>
 
 <script>
+// Lógica para quitar la intro de Pac-Man al cargar
 window.addEventListener('load', () => {
     const intro = document.getElementById('intro-overlay');
     setTimeout(() => {
@@ -240,7 +371,7 @@ window.addEventListener('load', () => {
         setTimeout(() => {
             intro.style.display = 'none';
         }, 1000);
-    }, 4800); 
+    }, 5000); // 5 segundos para que crucen la pantalla
 });
 </script>
 
