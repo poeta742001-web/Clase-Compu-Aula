@@ -4,17 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Adicción a los Videojuegos — Investigación Digital</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;700&display=swap" rel="stylesheet">
+<meta name="description" content="Proyecto de investigación digital sobre la adicción a los videojuegos en jóvenes y adolescentes.">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
 --bg:hsl(240,15%,5%);--fg:hsl(220,20%,90%);
---primary:hsl(160,100%,45%);--neon-glow:160,100%,45%;
---secondary:hsl(270,80%,60%);--neon-purple:270,80%,60%;
+--card:hsl(240,12%,10%);--card-fg:hsl(220,20%,90%);
+--primary:hsl(160,100%,45%);--primary-fg:hsl(240,15%,5%);
+--secondary:hsl(270,80%,60%);--secondary-fg:#fff;
+--muted:hsl(240,10%,15%);--muted-fg:hsl(220,15%,55%);
+--accent:hsl(200,100%,55%);--destructive:hsl(0,80%,55%);
+--border:hsl(240,10%,18%);
+--neon-glow:160,100%,45%;--neon-purple:270,80%,60%;
 --font-display:'Orbitron',sans-serif;--font-body:'Exo 2',sans-serif;
 }
 
-/* --- INTRO PAC-MAN CORREGIDA --- */
+/* --- ESTILOS DE LA INTRO PAC-MAN MEJORADA --- */
 #intro-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -30,7 +36,7 @@
 .pacman-scene {
     position: relative;
     width: 100%;
-    height: 100px;
+    height: 120px;
     display: flex;
     align-items: center;
 }
@@ -40,87 +46,97 @@
     left: -400px;
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: 30px;
     animation: moveAcross 5s linear forwards;
 }
 
-/* Pac-Man Circular y Animado */
 .pacman-wrapper {
-    width: 60px;
-    height: 60px;
-    position: relative;
+    width: 65px;
+    height: 65px;
 }
 
-/* Fantasma Estético */
 .ghost {
-    width: 50px;
-    height: 55px;
-    background: #FF0000;
+    width: 55px;
+    height: 60px;
+    background: #FF0000; 
     position: relative;
-    border-radius: 25px 25px 0 0;
+    border-radius: 30px 30px 0 0;
     filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.6));
 }
+
 .ghost::before, .ghost::after {
     content: '';
     position: absolute;
     background: white;
     border-radius: 50%;
-    top: 15px; width: 12px; height: 15px;
+    top: 18px; width: 14px; height: 16px;
 }
 .ghost::before { left: 10px; }
-.ghost::after { left: 28px; }
+.ghost::after { left: 31px; }
 
 .pupil {
     position: absolute;
     background: #2121DE;
-    width: 6px; height: 6px;
+    width: 7px; height: 7px;
     border-radius: 50%;
-    top: 22px; z-index: 2;
+    top: 24px; z-index: 2;
 }
-.p-left { left: 16px; }
-.p-right { left: 34px; }
+.p-left { left: 17px; }
+.p-right { left: 38px; }
 
 .ghost-feet {
     position: absolute;
-    bottom: -8px; left: 0; width: 100%; height: 12px;
+    bottom: -10px; left: 0; width: 100%; height: 14px;
     background: #FF0000;
     clip-path: polygon(0% 0%, 16% 100%, 33% 0%, 50% 100%, 66% 0%, 83% 100%, 100% 0%);
 }
 
-/* Bolitas Neón */
 .pellet {
-    width: 14px; height: 14px;
+    width: 15px; height: 15px;
     background: var(--primary);
     border-radius: 50%;
-    box-shadow: 0 0 12px var(--primary);
+    box-shadow: 0 0 15px var(--primary);
 }
 
 @keyframes moveAcross {
     0% { left: -400px; }
-    100% { left: 105%; }
+    100% { left: 110%; }
 }
 
-/* --- ESTILOS WEB --- */
+/* --- ESTILOS DE LA PÁGINA --- */
 body{background:var(--bg);color:var(--fg);font-family:var(--font-body);line-height:1.7;
 background-image:linear-gradient(hsla(var(--neon-glow),.03) 1px,transparent 1px),linear-gradient(90deg,hsla(var(--neon-glow),.03) 1px,transparent 1px);background-size:50px 50px}
-h1,h2,h3{font-family:var(--font-display)}
+a{color:var(--primary);text-decoration:none}
+h1,h2,h3,h4{font-family:var(--font-display)}
 
 nav{position:fixed;top:0;left:0;right:0;z-index:50;background:hsla(240,15%,5%,.8);backdrop-filter:blur(12px);border-bottom:1px solid hsla(var(--neon-glow),.1)}
-.nav-inner{max-width:72rem;margin:auto;padding:.75rem 1rem;display:flex;justify-content:space-between;align-items:center}
-.nav-brand{color:var(--primary);font-weight:700;text-shadow:0 0 10px var(--primary)}
+.nav-inner{max-width:72rem;margin:auto;padding:.75rem 1rem;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{color:var(--primary);font-family:var(--font-display);font-weight:700;font-size:.85rem;letter-spacing:.15em;text-shadow:0 0 7px hsla(var(--neon-glow),.8),0 0 20px hsla(var(--neon-glow),.5)}
+.nav-links{display:flex;gap:1.5rem}
+.nav-links a{font-family:var(--font-display);font-size:.7rem;letter-spacing:.12em;color:var(--muted-fg);transition:color .2s}
+.nav-links a:hover{color:var(--primary)}
+@media(max-width:768px){.nav-links{display:none}}
 
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:1rem;position:relative}
-.hero-content{position:relative;z-index:10;max-width:52rem}
-.hero h1 span{color:var(--primary);text-shadow:0 0 20px var(--primary)}
-
-.btn-primary{display:inline-block;margin-top:2rem;padding:.75rem 2rem;background:var(--primary);color:#000;font-family:var(--font-display);font-weight:700;border-radius:.5rem;text-decoration:none;transition:0.3s}
-.btn-primary:hover{transform:scale(1.05);box-shadow:0 0 20px var(--primary)}
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;text-align:center}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,hsla(240,15%,5%,.6),hsla(240,15%,5%,.4),var(--bg))}
+.hero-content{position:relative;z-index:10;padding:1rem;max-width:52rem}
+.hero h1{font-size:clamp(2rem,6vw,4.5rem);font-weight:900;line-height:1.1;margin-bottom:1.5rem}
+.hero h1 span{color:var(--primary);text-shadow:0 0 7px hsla(var(--neon-glow),.8),0 0 20px hsla(var(--neon-glow),.5)}
 
 main{max-width:52rem;margin:0 auto;padding:5rem 1rem}
-.section-card{border:1px solid hsla(var(--neon-glow),.3);border-radius:.75rem;background:hsla(240,12%,10%,.6);padding:2rem;margin-bottom:3rem}
-.team-member{border:1px solid hsla(var(--neon-purple),.2);padding:1rem;margin-top:0.5rem;border-radius:0.5rem;background:rgba(255,255,255,0.03)}
+.section-card{border:1px solid hsla(var(--neon-glow),.3);border-radius:.75rem;background:hsla(240,12%,10%,.6);backdrop-filter:blur(4px);padding:1.5rem;margin-bottom:3rem;animation:fadeUp .6s ease both}
+.info-box{border:1px solid hsla(var(--neon-glow),.2);border-radius:.5rem;padding:1.25rem;background:hsla(240,12%,10%,.4);margin-top:1.5rem}
 
-footer{padding:3rem;text-align:center;border-top:1px solid rgba(255,255,255,0.1);font-size:0.8rem;opacity:0.6}
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:3rem}
+@media(min-width:768px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
+.stat-card{border:1px solid hsla(var(--neon-glow),.2);border-radius:.5rem;background:hsla(240,12%,10%,.4);padding:1.25rem;text-align:center}
+.stat-val{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:900;color:var(--primary);font-family:var(--font-display)}
+
+.team-member{display:flex;align-items:center;gap:1rem;border:1px solid hsla(var(--neon-purple),.15);border-radius:.5rem;padding:1rem;background:hsla(240,12%,10%,.3);margin-bottom:.75rem}
+
+footer{border-top:1px solid hsla(var(--neon-glow),.1);padding:2rem 1rem;text-align:center;font-size:.75rem;color:var(--muted-fg)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 </style>
 </head>
 <body>
@@ -135,7 +151,7 @@ footer{padding:3rem;text-align:center;border-top:1px solid rgba(255,255,255,0.1)
             </div>
 
             <div class="pacman-wrapper">
-                <svg viewBox="0 0 100 100">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="50" cy="50" r="48" fill="#FFFF00" />
                     <path d="M50,50 L100,20 L100,80 Z" fill="#000">
                         <animate attributeName="d" dur="0.2s" repeatCount="infinite"
@@ -156,36 +172,64 @@ footer{padding:3rem;text-align:center;border-top:1px solid rgba(255,255,255,0.1)
 </div>
 
 <nav>
-    <div class="nav-inner">
-        <span class="nav-brand">🎮 INVESTIGACIÓN</span>
-    </div>
+<div class="nav-inner">
+<span class="nav-brand">🎮 INVESTIGACIÓN</span>
+<div class="nav-links">
+<a href="#tema">Tema</a>
+<a href="#metodo">Método</a>
+<a href="#investigacion">Investigación</a>
+<a href="#analisis">Análisis</a>
+<a href="#conclusiones">Conclusiones</a>
+<a href="#equipo">Equipo</a>
+</div>
+</div>
 </nav>
 
 <header class="hero">
-    <div class="hero-content">
-        <p style="letter-spacing:3px; color:var(--primary)">PROYECTO DIGITAL</p>
-        <h1>Adicción a los <span>Videojuegos</span></h1>
-        <p style="margin-top:1rem; opacity:0.8">Un análisis sobre el impacto del uso excesivo en jóvenes.</p>
-        <a href="#contenido" class="btn-primary">EXPLORAR INVESTIGACIÓN</a>
-    </div>
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<p class="hero-sub" style="color:var(--primary); letter-spacing: 0.3em; margin-bottom: 1rem;">PROYECTO DE INVESTIGACIÓN DIGITAL</p>
+<h1>Adicción a los <span>Videojuegos</span></h1>
+<p style="color:var(--muted-fg); max-width:40rem; margin:0 auto 2.5rem;">Un análisis sobre el impacto del uso excesivo de videojuegos en la vida cotidiana de los jóvenes.</p>
+<a href="#tema" class="btn-primary">EXPLORAR ▼</a>
+</div>
 </header>
 
-<main id="contenido">
-    <section class="section-card">
-        <h2 style="color:var(--primary); margin-bottom:1rem">01. Elección del Tema</h2>
-        <p>Análisis de la adicción reconocida por la OMS como trastorno mental. Nos enfocamos en jóvenes de 15 a 25 años.</p>
-    </section>
+<main>
+<section class="section-card green" id="tema">
+<div class="section-header" style="display:flex; align-items:baseline; gap:1rem; margin-bottom:1.5rem;">
+<span class="section-num green" style="font-size:3rem; font-weight:900; color:var(--primary); opacity:0.5;">01</span>
+<h2 class="section-title">Elección del Tema</h2>
+</div>
+<div class="section-body">
+<p><strong style="color:var(--primary)">Tema:</strong> La adicción a los videojuegos en jóvenes y adolescentes. Trastorno reconocido por la OMS desde 2018.</p>
+<div class="info-box">
+<h3 style="color:var(--primary); margin-bottom:0.5rem;">🎯 OBJETIVO GENERAL</h3>
+<p>Analizar las causas y consecuencias en jóvenes de 15 a 25 años.</p>
+</div>
+</div>
+</section>
 
-    <section class="section-card" style="border-color:var(--secondary)">
-        <h2 style="color:var(--secondary); margin-bottom:1rem">02. Equipo</h2>
-        <div class="team-member">Mojica Isidoro Lael</div>
-        <div class="team-member">Phillips Lopez Leonardo</div>
-        <div class="team-member">Zamora Salgado Brandon</div>
-    </section>
+<div class="stats-grid">
+<div class="stat-card"><p class="stat-val">73%</p><p class="stat-label" style="font-size:0.8rem; color:var(--muted-fg)">juegan +3h diarias</p></div>
+<div class="stat-card"><p class="stat-val">58%</p><p class="stat-label" style="font-size:0.8rem; color:var(--muted-fg)">impacto estudios</p></div>
+<div class="stat-card"><p class="stat-val">45%</p><p class="stat-label" style="font-size:0.8rem; color:var(--muted-fg)">ansiedad</p></div>
+<div class="stat-card"><p class="stat-val">62%</p><p class="stat-label" style="font-size:0.8rem; color:var(--muted-fg)">aislamiento</p></div>
+</div>
+
+<section class="section-card purple" id="equipo">
+<div class="section-header" style="display:flex; align-items:baseline; gap:1rem; margin-bottom:1.5rem;">
+<span class="section-num purple" style="font-size:3rem; font-weight:900; color:var(--secondary); opacity:0.5;">02</span>
+<h2 class="section-title">Equipo</h2>
+</div>
+<div class="team-member"><span>Mojica Isidoro Lael</span></div>
+<div class="team-member"><span>Phillips Lopez Leonardo</span></div>
+<div class="team-member"><span>Zamora Salgado Brandon</span></div>
+</section>
 </main>
 
 <footer>
-    <p>PROYECTO DE INVESTIGACIÓN DIGITAL — 2025</p>
+<p class="brand">PROYECTO DE INVESTIGACIÓN DIGITAL — 2025</p>
 </footer>
 
 <script>
@@ -193,8 +237,10 @@ window.addEventListener('load', () => {
     const intro = document.getElementById('intro-overlay');
     setTimeout(() => {
         intro.style.opacity = '0';
-        setTimeout(() => intro.remove(), 1000);
-    }, 4800); // Se quita cuando termina de pasar
+        setTimeout(() => {
+            intro.style.display = 'none';
+        }, 1000);
+    }, 4800); 
 });
 </script>
 
