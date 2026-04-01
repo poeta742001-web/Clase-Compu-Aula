@@ -19,12 +19,76 @@
 --neon-glow:160,100%,45%;--neon-purple:270,80%,60%;
 --font-display:'Orbitron',sans-serif;--font-body:'Exo 2',sans-serif;
 }
+
+/* --- ESTILOS DE LA INTRO PAC-MAN --- */
+#intro-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #000;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+    transition: opacity 1s ease;
+}
+
+.pacman-container {
+    position: absolute;
+    left: -300px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    animation: moveAcross 4.5s linear forwards;
+}
+
+.pacman {
+    width: 50px;
+    height: 50px;
+    background: #FFFF00;
+    position: relative;
+    clip-path: polygon(100% 20%, 100% 35%, 50% 50%, 100% 65%, 100% 80%, 0% 100%, 0% 0%);
+    animation: eat 0.3s steps(2) infinite;
+}
+
+.ghost {
+    width: 45px;
+    height: 50px;
+    background: #FF0000; /* Fantasma Rojo (Blinky) */
+    position: relative;
+    border-radius: 25px 25px 0 0;
+}
+
+.ghost::before { /* Ojos */
+    content: '';
+    position: absolute;
+    top: 15px; left: 10px; width: 8px; height: 8px; background: white;
+    box-shadow: 20px 0 white;
+}
+
+.pellet {
+    width: 12px;
+    height: 12px;
+    background: var(--primary); /* Bolitas del color de tu tema */
+    border-radius: 2px;
+    box-shadow: 0 0 10px hsla(var(--neon-glow), 0.8);
+}
+
+@keyframes moveAcross {
+    0% { left: -300px; }
+    100% { left: 110%; }
+}
+
+@keyframes eat {
+    0% { clip-path: polygon(100% 20%, 100% 35%, 50% 50%, 100% 65%, 100% 80%, 0% 100%, 0% 0%); }
+    100% { clip-path: polygon(100% 0%, 100% 0%, 100% 50%, 100% 0%, 100% 100%, 0% 100%, 0% 0%); }
+}
+
+/* --- RESTO DE TUS ESTILOS --- */
 body{background:var(--bg);color:var(--fg);font-family:var(--font-body);line-height:1.7;
 background-image:linear-gradient(hsla(var(--neon-glow),.03) 1px,transparent 1px),linear-gradient(90deg,hsla(var(--neon-glow),.03) 1px,transparent 1px);background-size:50px 50px}
 a{color:var(--primary);text-decoration:none}
 h1,h2,h3,h4{font-family:var(--font-display)}
 
-/* Nav */
 nav{position:fixed;top:0;left:0;right:0;z-index:50;background:hsla(240,15%,5%,.8);backdrop-filter:blur(12px);border-bottom:1px solid hsla(var(--neon-glow),.1)}
 .nav-inner{max-width:72rem;margin:auto;padding:.75rem 1rem;display:flex;align-items:center;justify-content:space-between}
 .nav-brand{color:var(--primary);font-family:var(--font-display);font-weight:700;font-size:.85rem;letter-spacing:.15em;text-shadow:0 0 7px hsla(var(--neon-glow),.8),0 0 20px hsla(var(--neon-glow),.5)}
@@ -33,7 +97,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;background:hsla(240,15%,5%,.8
 .nav-links a:hover{color:var(--primary)}
 @media(max-width:768px){.nav-links{display:none}}
 
-/* Hero */
 .hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;text-align:center}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,hsla(240,15%,5%,.6),hsla(240,15%,5%,.4),var(--bg))}
 .hero-content{position:relative;z-index:10;padding:1rem;max-width:52rem}
@@ -44,10 +107,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;background:hsla(240,15%,5%,.8
 .btn-primary{display:inline-block;padding:.75rem 2rem;background:var(--primary);color:var(--primary-fg);font-family:var(--font-display);font-weight:700;font-size:.85rem;letter-spacing:.12em;border-radius:.5rem;box-shadow:0 0 5px hsla(var(--neon-glow),.4),inset 0 0 5px hsla(var(--neon-glow),.1);transition:transform .2s}
 .btn-primary:hover{transform:scale(1.05)}
 
-/* Main */
 main{max-width:52rem;margin:0 auto;padding:5rem 1rem}
 
-/* Section Card */
 .section-card{border:1px solid hsla(var(--neon-glow),.3);border-radius:.75rem;background:hsla(240,12%,10%,.6);backdrop-filter:blur(4px);padding:1.5rem;margin-bottom:3rem;animation:fadeUp .6s ease both}
 .section-card.purple{border-color:hsla(var(--neon-purple),.3);box-shadow:0 0 5px hsla(var(--neon-purple),.4),inset 0 0 5px hsla(var(--neon-purple),.1)}
 .section-card.green{box-shadow:0 0 5px hsla(var(--neon-glow),.4),inset 0 0 5px hsla(var(--neon-glow),.1)}
@@ -64,7 +125,6 @@ main{max-width:52rem;margin:0 auto;padding:5rem 1rem}
 .section-body{color:hsla(220,20%,90%,.8);line-height:1.8}
 .section-body strong.green{color:var(--primary)}.section-body strong.purple{color:var(--secondary)}.section-body strong.blue{color:var(--accent)}
 
-/* Info boxes */
 .info-box{border:1px solid hsla(var(--neon-glow),.2);border-radius:.5rem;padding:1.25rem;background:hsla(240,12%,10%,.4);margin-top:1.5rem}
 .info-box.purple-border{border-color:hsla(var(--neon-purple),.2)}
 .info-box.red-border{border-color:hsla(0,80%,55%,.2)}
@@ -76,37 +136,42 @@ main{max-width:52rem;margin:0 auto;padding:5rem 1rem}
 .info-box ul,.info-box ol{padding-left:1.25rem;color:hsla(220,20%,90%,.7)}
 .info-box li{margin-bottom:.5rem;font-size:.95rem}
 
-/* Grid 2-col */
 .grid-2{display:grid;gap:1rem;margin-top:1.5rem}
 @media(min-width:768px){.grid-2{grid-template-columns:1fr 1fr}}
 
-/* Stats */
 .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:3rem}
 @media(min-width:768px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
 .stat-card{border:1px solid hsla(var(--neon-glow),.2);border-radius:.5rem;background:hsla(240,12%,10%,.4);padding:1.25rem;text-align:center;box-shadow:0 0 5px hsla(var(--neon-glow),.4),inset 0 0 5px hsla(var(--neon-glow),.1)}
 .stat-val{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:900;color:var(--primary);font-family:var(--font-display);text-shadow:0 0 7px hsla(var(--neon-glow),.8),0 0 20px hsla(var(--neon-glow),.5)}
 .stat-label{font-size:.85rem;color:var(--muted-fg);margin-top:.5rem}
 
-/* Steps */
 .step{margin-bottom:1.5rem}
 .step h3{color:var(--accent);font-family:var(--font-display);font-size:.75rem;letter-spacing:.1em;margin-bottom:.35rem}
 
-/* Team */
 .team-member{display:flex;align-items:center;gap:1rem;border:1px solid hsla(var(--neon-purple),.15);border-radius:.5rem;padding:1rem;background:hsla(240,12%,10%,.3);margin-bottom:.75rem}
 .team-num{color:var(--secondary);font-family:var(--font-display);font-size:.85rem;font-weight:700;min-width:2rem}
 
-/* Footer */
 footer{border-top:1px solid hsla(var(--neon-glow),.1);padding:2rem 1rem;text-align:center;font-size:.75rem;color:var(--muted-fg)}
 footer .brand{font-family:var(--font-display);letter-spacing:.2em}
 
-/* Animations */
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 .fade-in{animation:fadeUp .6s ease both}
 </style>
 </head>
 <body>
 
-<!-- Nav -->
+<div id="intro-overlay">
+    <div class="pacman-container">
+        <div class="ghost"></div>
+        <div class="pacman"></div>
+        <div class="pellet"></div>
+        <div class="pellet"></div>
+        <div class="pellet"></div>
+        <div class="pellet"></div>
+        <div class="pellet"></div>
+    </div>
+</div>
+
 <nav>
 <div class="nav-inner">
 <span class="nav-brand">🎮 INVESTIGACIÓN</span>
@@ -121,7 +186,6 @@ footer .brand{font-family:var(--font-display);letter-spacing:.2em}
 </div>
 </nav>
 
-<!-- Hero -->
 <header class="hero">
 <div class="hero-overlay"></div>
 <div class="hero-content">
@@ -134,7 +198,6 @@ footer .brand{font-family:var(--font-display);letter-spacing:.2em}
 
 <main>
 
-<!-- 01 Tema -->
 <section class="section-card green" id="tema">
 <div class="section-header">
 <span class="section-num green">01</span>
@@ -157,7 +220,6 @@ footer .brand{font-family:var(--font-display);letter-spacing:.2em}
 </div>
 </section>
 
-<!-- 02 Método -->
 <section class="section-card purple" id="metodo">
 <div class="section-header">
 <span class="section-num purple">02</span>
@@ -170,14 +232,13 @@ footer .brand{font-family:var(--font-display);letter-spacing:.2em}
 <ul>
 <li>Las encuestas online permiten alcanzar una muestra amplia y diversa de jóvenes gamers de forma rápida y económica.</li>
 <li>El análisis de contenido en redes sociales ofrece datos cualitativos auténticos sobre experiencias reales de usuarios.</li>
-<li>La combinación de ambas técnicas (método mixto) permite triangular la información y obtener resultados más sólidos.</li>
+<li>La combinación de ambas técnicas (método mixto) permite triangula la información y obtener resultados más sólidos.</li>
 <li>Al ser un tema digital, la investigación en medios digitales resulta coherente y contextualmente apropiada.</li>
 </ul>
 </div>
 </div>
 </section>
 
-<!-- 03 Investigación -->
 <section class="section-card blue" id="investigacion">
 <div class="section-header">
 <span class="section-num blue">03</span>
@@ -191,7 +252,6 @@ footer .brand{font-family:var(--font-display);letter-spacing:.2em}
 </div>
 </section>
 
-<!-- Stats -->
 <div class="stats-grid">
 <div class="stat-card"><p class="stat-val">73%</p><p class="stat-label">juegan más de 3 horas diarias</p></div>
 <div class="stat-card"><p class="stat-val">58%</p><p class="stat-label">reportan impacto en sus estudios</p></div>
@@ -199,7 +259,6 @@ footer .brand{font-family:var(--font-display);letter-spacing:.2em}
 <div class="stat-card"><p class="stat-val">62%</p><p class="stat-label">prefieren jugar que socializar</p></div>
 </div>
 
-<!-- 04 Análisis -->
 <section class="section-card red" id="analisis">
 <div class="section-header">
 <span class="section-num red">04</span>
@@ -234,7 +293,6 @@ footer .brand{font-family:var(--font-display);letter-spacing:.2em}
 </div>
 </section>
 
-<!-- 05 Conclusiones -->
 <section class="section-card green" id="conclusiones">
 <div class="section-header">
 <span class="section-num green">05</span>
@@ -256,7 +314,6 @@ footer .brand{font-family:var(--font-display);letter-spacing:.2em}
 </div>
 </section>
 
-<!-- 06 Equipo -->
 <section class="section-card purple" id="equipo">
 <div class="section-header">
 <span class="section-num purple">06</span>
@@ -277,6 +334,19 @@ footer .brand{font-family:var(--font-display);letter-spacing:.2em}
 <p class="brand">PROYECTO DE INVESTIGACIÓN DIGITAL — 2025</p>
 <p style="margin-top:.25rem;opacity:.5">Adicción a los Videojuegos</p>
 </footer>
+
+<script>
+// Lógica para quitar la intro de Pac-Man al cargar
+window.addEventListener('load', () => {
+    const intro = document.getElementById('intro-overlay');
+    setTimeout(() => {
+        intro.style.opacity = '0';
+        setTimeout(() => {
+            intro.style.display = 'none';
+        }, 1000);
+    }, 4500); // Duración total de la intro (4.5 segundos)
+});
+</script>
 
 </body>
 </html>
